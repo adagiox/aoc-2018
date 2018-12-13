@@ -1,4 +1,3 @@
-
 class Node:
 
     def __init__(self, parent):
@@ -13,9 +12,8 @@ class Node:
         self.metadata.append(data)
 
 def solve(puzzle):
-    root = Node(None)
     puzzle.append(0)
-    r = recursive_parse(puzzle, root, puzzle.pop(0), puzzle.pop(0))
+    root = recursive_parse(puzzle, None, puzzle.pop(0), puzzle.pop(0))
     print(puzzle[-1])
 
 def recursive_parse(puzzle, parent, child_count, meta_count):

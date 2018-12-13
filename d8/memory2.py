@@ -1,4 +1,3 @@
-
 class Node:
 
     def __init__(self, parent):
@@ -6,7 +5,6 @@ class Node:
         self.children = []
         self.metadata = []
         self.s = 0
-        self.leaf = False
 
     def __repr__(self):
         return f"s:{self.s}"
@@ -18,9 +16,8 @@ class Node:
         self.metadata.append(data)
 
 def solve(puzzle):
-    root = Node(None)
-    r = recursive_parse(puzzle, root, puzzle.pop(0), puzzle.pop(0))
-    print(r.s)
+    root = recursive_parse(puzzle, None, puzzle.pop(0), puzzle.pop(0))
+    print(root.s)
 
 def recursive_parse(puzzle, parent, child_count, meta_count):
     current_node = Node(parent)
@@ -29,7 +26,6 @@ def recursive_parse(puzzle, parent, child_count, meta_count):
     for i in range(meta_count):
         current_node.add_metadata(puzzle.pop(0))
         if child_count == 0:
-            current_node.leaf = True
             current_node.s += current_node.metadata[-1]
         elif current_node.metadata[-1]-1 < child_count:
             current_node.s += current_node.children[current_node.metadata[-1]-1].s
